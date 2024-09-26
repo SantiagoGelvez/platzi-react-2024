@@ -1,9 +1,8 @@
-function TodoItem(props) {
+function TodoItem({task, completed}) {
     return (
       <li>
-        <span>V</span>
-        <p>{props.task}</p>
-        <span>X</span>
+        <p>{task} <span>{completed ? 'V' : 'X'}</span></p>
+        
       </li>
     );
   }
