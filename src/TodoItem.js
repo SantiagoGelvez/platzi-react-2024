@@ -1,8 +1,13 @@
+import './TodoItem.css';
+
 function TodoItem({task, completed}) {
     return (
-      <li>
-        <p>{task} <span>{completed ? 'V' : 'X'}</span></p>
+      <li className="listItem">
+        <span className={`listItem-check ${completed && 'listItem-check--done'}`}>{completed ? 'V' : 'O'}</span> 
+
+        <label className={`${completed && 'listItem--done'}`}>{task}</label>
         
+        <button className="listItem-button">X</button>
       </li>
     );
   }

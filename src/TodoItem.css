@@ -1,0 +1,52 @@
+.listItem {
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    align-items: center;
+    padding: 1rem;
+    margin: 2rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    position: relative;
+    background-color: white;
+}
+
+.listItem-check {
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 0;
+    margin: 0;
+    cursor: pointer
+}
+
+.listItem--done {
+    text-decoration: line-through;
+}
+
+.listItem-check--done {
+    color: #56e96a
+}
+
+.listItem-button {
+    color: #ffffff;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+    font-size: 1rem;
+    position: absolute;
+    padding: 0 auto;
+    margin: 0 auto;
+    top: -0.5rem;
+    right: -0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 99rem;
+    background-color: #ff4949;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+}
+
+.listItem-button:hover {
+    background-color: #ff0000;
+    scale: 1.2;
+    transition: all 0.3s ease-out;
+}
