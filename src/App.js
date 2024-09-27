@@ -1,3 +1,4 @@
+import React from 'react';
 import { TodoCounter } from './TodoCounter';
 import { TodoSearch } from './TodoSearch';
 import { TodoList } from './TodoList';
@@ -36,14 +37,23 @@ const defaultTodos = [
 ]
 
 function App() {
+  const [todos, setTodos] = React.useState(defaultTodos)
+  const [searchValue, setsearchValue] = React.useState('')
+
+  const nomalizedSearchValue = (text) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim()
+
+  const completedTodos = todos.filter(todo => !!todo.completed).length
+  const totalTodos = todos.length
+  const searchedTodos = todos.filter(todo => nomalizedSearchValue(todo.task).includes(nomalizedSearchValue(searchValue)))
+
   return (
     <>
-      <TodoCounter completed={defaultTodos.filter(todo => todo.completed).length} total={defaultTodos.length} />
+      <TodoCounter completed={completedTodos} total={totalTodos} />
       
-      <TodoSearch />
+      <TodoSearch searchValue={searchValue} setsearchValue={setsearchValue} />
 
       <TodoList>
-        {defaultTodos.map(todo => (
+        {searchedTodos.map(todo => (
           <TodoItem key={todo.id} task={todo.task} completed={todo.completed}/>
         ))}
       </TodoList>
