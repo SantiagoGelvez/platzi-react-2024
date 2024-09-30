@@ -46,17 +46,32 @@ function App() {
   const totalTodos = todos.length
   const searchedTodos = todos.filter(todo => nomalizedSearchValue(todo.task).includes(nomalizedSearchValue(searchValue)))
 
+  const completeTodo = (id) => {
+    const newTodos = [...todos]
+    const todoIndex = newTodos.findIndex(todo => todo.id === id)
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed
+    setTodos(newTodos)
+  }
+
+  const deleteTodo = (id) => {
+    const newTodos = todos.filter(todo => todo.id !== id)
+    setTodos(newTodos)
+  }
+
   return (
     <>
       <TodoCounter completed={completedTodos} total={totalTodos} />
       
       <TodoSearch searchValue={searchValue} setsearchValue={setsearchValue} />
 
-      <TodoList>
-        {searchedTodos.map(todo => (
-          <TodoItem key={todo.id} task={todo.task} completed={todo.completed}/>
-        ))}
-      </TodoList>
+      {
+        !!totalTodos
+        ? <TodoList>
+            {searchedTodos.map(todo => (
+              <TodoItem key={todo.id} task={todo.task} completed={todo.completed} onComplete={() => completeTodo(todo.id)} onDelete={() => deleteTodo(todo.id)}/>
+            ))}
+          </TodoList>
+        : <h2 style={{textAlign: 'center'}}>¡Agrega una nueva tarea 🤓!</h2>}
 
       <CreateTodoButton />
     </>
