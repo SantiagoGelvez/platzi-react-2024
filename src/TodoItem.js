@@ -1,17 +1,22 @@
 import './TodoItem.css';
+import { BsCircle, BsCheckCircle, BsX  } from "react-icons/bs";
 
 function TodoItem({task, completed, onComplete, onDelete}) {
     return (
-      <li className="listItem">
+        <li className="listItem">
         <span className={`listItem-check ${completed && 'listItem-check--done'}`} onClick={onComplete}>
-          {completed ? 'V' : 'O'}
+            {completed ? <BsCheckCircle /> : <BsCircle />}
         </span> 
 
-        <label className={`${completed && 'listItem--done'}`}>{task}</label>
+        <span className={`listItem-text ${completed && 'listItem--done'}`} onClick={onComplete}>
+            {task}
+        </span>
         
-        <button className="listItem-button" onClick={onDelete}>X</button>
+        <div className="listItem-button" onClick={onDelete}>
+            <BsX />
+        </div>
       </li>
     );
-  }
+}
 
 export { TodoItem }

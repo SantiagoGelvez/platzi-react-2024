@@ -19,6 +19,10 @@
     cursor: pointer
 }
 
+.listItem-text {
+    cursor: pointer;
+}
+
 .listItem--done {
     text-decoration: line-through;
 }
@@ -28,20 +32,15 @@
 }
 
 .listItem-button {
+    display: flex;
     color: #ffffff;
-    width: 1.5rem;
-    height: 1.5rem;
-    text-align: center;
-    font-size: 1rem;
     position: absolute;
-    padding: 0 auto;
-    margin: 0 auto;
     top: -0.5rem;
     right: -0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 99rem;
     background-color: #ff4949;
     cursor: pointer;
+    border-radius: 50%;
+    border: none;
     transition: all 0.3s ease-out;
 }
 
