@@ -26,18 +26,34 @@ import { CreateTodoButton } from './CreateTodoButton';
 //   {id: 'u1v2w-3x4y5', description: 'Escribir un blog', status_code: 'in-progress'}
 // ]
 
-const defaultTodos = [
-  {id: '07nv4-0nc72', task: 'Hacer el desayuno', completed: true},
-  {id: 'vnv90-kc7x2', task: 'Tomar el curso de React', completed: false},
-  {id: 'pabg7-x1z34', task: 'Bañar la moto', completed: true},
-  {id: '178m6-ja810', task: 'Sacar la basura', completed: true},
-  {id: '0wybu-iwdj4', task: 'Llamar a la cita de las gafas', completed: false},
-  {id: 'bv8l4-9f27o', task: 'Comprar un perro', completed: true},
-  {id: 'cn3n8-vl0r0', task: 'Grabar una canción', completed: false},
-]
+// const defaultTodos = [
+//   {id: '07nv4-0nc72', task: 'Hacer el desayuno', completed: true},
+//   {id: 'vnv90-kc7x2', task: 'Tomar el curso de React', completed: false},
+//   {id: 'pabg7-x1z34', task: 'Bañar la moto', completed: true},
+//   {id: '178m6-ja810', task: 'Sacar la basura', completed: true},
+//   {id: '0wybu-iwdj4', task: 'Llamar a la cita de las gafas', completed: false},
+//   {id: 'bv8l4-9f27o', task: 'Comprar un perro', completed: true},
+//   {id: 'cn3n8-vl0r0', task: 'Grabar una canción', completed: false},
+// ]
+
+// localStorage.setItem('TODOS_V1', defaultTodos)
+// localStorage.removeItem('TODOS_V1')
+
+function useLocalStorage(itemName, initialValue) {
+  let parsedItem = JSON.parse(localStorage.getItem(itemName) || JSON.stringify(initialValue))
+
+  const [item, setItem] = React.useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    setItem(newItem)
+    localStorage.setItem(itemName, JSON.stringify(newItem))
+  }
+
+  return [item, saveItem]
+}
 
 function App() {
-  const [todos, setTodos] = React.useState(defaultTodos)
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1', [])
   const [searchValue, setsearchValue] = React.useState('')
 
   const nomalizedSearchValue = (text) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim()
@@ -50,12 +66,12 @@ function App() {
     const newTodos = [...todos]
     const todoIndex = newTodos.findIndex(todo => todo.id === id)
     newTodos[todoIndex].completed = !newTodos[todoIndex].completed
-    setTodos(newTodos)
+    saveTodos(newTodos)
   }
 
   const deleteTodo = (id) => {
     const newTodos = todos.filter(todo => todo.id !== id)
-    setTodos(newTodos)
+    saveTodos(newTodos)
   }
 
   return (
