@@ -4,9 +4,9 @@ import { BsCircle, BsCheckCircle, BsX  } from "react-icons/bs";
 function TodoItem({task, completed, onComplete, onDelete}) {
     return (
         <li className="listItem">
-        <span className={`listItem-check ${completed && 'listItem-check--done'}`} onClick={onComplete}>
-            {completed ? <BsCheckCircle /> : <BsCircle />}
-        </span> 
+        <span className={`listItem-check`} onClick={onComplete}>
+            {completed ? <BsCheckCircle className='listItem-check--done' /> : <BsCircle />}
+        </span>
 
         <span className={`listItem-text ${completed && 'listItem--done'}`} onClick={onComplete}>
             {task}
