@@ -1,14 +1,16 @@
 import './todoCounter.css'
 
-function TodoCounter({completed, total}) {
+function TodoCounter({completed, total, loading}) {
     return (
-      <h1>
+      <h1 className="main-header">
         {
-        total === 0
-        ? '🥱 No tienes tareas pendientes'
-        : completed === total
-          ? '🥳 Completaste todas tus tareas 🎉'
-          : `Has completado ${completed} de ${total} tareas`}
+          loading
+          ? 'Cargando tareas...'
+          : total === 0
+            ? '🥱 No tienes tareas pendientes'
+            : completed === total
+              ? '🥳 Completaste todas tus tareas 🎉'
+              : `Has completado ${completed} de ${total} tareas`}
       </h1>
     );
   }
